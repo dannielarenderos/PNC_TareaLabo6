@@ -44,7 +44,7 @@ public class MainController {
 			
 		}
 		
-		@RequestMapping("/guardarCont")
+		@RequestMapping("/guardar")
 		public ModelAndView guardarCont(@ModelAttribute Contribuyente c) {
 			
 			contribuyenteService.save(c);
