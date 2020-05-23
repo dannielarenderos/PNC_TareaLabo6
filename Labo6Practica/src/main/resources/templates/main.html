@@ -1,10 +1,12 @@
 <!DOCTYPE html>
-<html xmins:th="http://www.thymeleaf.org">
+<html xmlms:th="http://www.thymeleaf.org">
 <head>
-<meta charset="ISO-8859-1">
-<title>Lista de estudiantes</title>
+<meta charset="UTF-8">
+<title>Ver Contribuyentes</title>
 </head>
 <body>
+	
+	<h1>Listado de contribuyentes</h1>
 	<table>
 		<thead>
 			<tr>
@@ -20,24 +22,13 @@
 				<td th:text="${c.s_nombre}"></td>
 				<td th:text="${c.s_apellido}"></td>
 				<td th:text="${c.s_nit}"></td>
-				<td th:text="${c_importancia.s_importancia}"></td>
-				<td th:text="${f_fecha_ingreso}"></td>
+				<td th:text="${c.importancia.s_importancia}"></td>
+				<td th:text="${c.fingresoDelegate}"></td>
 			</tr>
 		</tbody>
 	</table><br>
-	<br>
-
 	
-	<br>
-	<form th:action="@{/insertar}">
-		<input type="submit" value ="Insertar nuevo estudiante">
-	</form> <br>
-	
-	<form th:action="@{/borrar}" method="post">
-		<label> Borrar por codigo </label> <input type="number"
-			name="codigo"> <br> <input type="submit" value="Borrar">
-
-	</form>
+	<input type="button" value="Regresar" onclick="location.href='./'" />
 
 </body>
-</html>
+</html></html>

@@ -12,7 +12,7 @@ public interface ContribuyenteDAO {
 
 	public Contribuyente findOne(Integer code) throws DataAccessException;
 
-	public void save(Contribuyente estudiante ) throws DataAccessException;
+	public void save(Contribuyente contribuyente ) throws DataAccessException;
 
 	void delete(Integer codigoContribuyente) throws DataAccessException;
 	

@@ -1,5 +1,6 @@
 package com.uca.capas.domain;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -50,7 +51,7 @@ public class Contribuyente{
 	@JoinColumn(name = "c_importancia")
 	private Importancia c_importancia;
 	
-	@Size(message="El nit no debe tener mas de 30 caracteres", max=14)
+	@Size(message="El nit no debe tener mas de 14 caracteres", max=14)
 	@NotEmpty(message="No puede estar vacio")
 	@Column(name="s_nit")
 	private String s_nit;
@@ -87,6 +88,12 @@ public class Contribuyente{
 
 	public Date getF_fecha_ingreso() {
 		return f_fecha_ingreso;
+	}
+
+	public String getFingresoDelegate() {
+		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+		return formato.format(f_fecha_ingreso);
+		
 	}
 
 	public void setF_fecha_ingreso(Date f_fecha_ingreso) {

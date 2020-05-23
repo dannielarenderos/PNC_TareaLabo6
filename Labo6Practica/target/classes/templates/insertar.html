@@ -1,34 +1,23 @@
 <!DOCTYPE html>
 <html xmlms:th="http://www.thymeleaf.org">
 <head>
-<meta charset="ISO-8859-1">
-<title>Agregar nuevo estudiante</title>
+<meta charset="UTF-8">
+<title>Agregar Contribuyente</title>
 </head>
 <body>
 	
-	<form th:action="@{/save}" th:object="${contribuyente}" method="post">
-
-		<h1>Ingresar Contribuyente</h1>
-
-			<label>Nombre :</label><br>
-			<input type="text" th:field="${contribuyente.s_nombre}"><br>
-			<span th:errors="${contribuyente.s_nombre}" style="color:  #E81505;"></span><br>
-			
-			<label>Apellido:</label><br>
-			<input type="text" th:field="${contribuyente.s_apellido}"><br>
-			<span th:errors="${contribuyente.s_apellido}" style="color:  #E81505;"></span><br>
-			
-			<label>Nit: </label><br>
-			<input type="text" th:field="${contribuyente.s_nit}"><br>
-			<span th:errors="${contribuyente.s_nit}" style="color:  #E81505;"></span><br>
-			
-		
+	<h1>Guardar Contribuyente</h1>
+	<form method="post" th:action="@{/guardarCont}" th:object="${contribuyente}">
+		<label>Nombre: <input type="text" id="s_nombre" th:field="*{s_nombre}" ></label><br>
+		<label>Apellido: <input type="text" id="s_apellido" th:field="*{s_apellido}" ></label><br>
+		<label>NIT: <input type="text" id="s_nit" th:field="*{s_nit}" ></label><br>
+		<label>Importancia: </label>
+		<select th:field="*{c_importancia}">
+			<option th:each="i: ${importancias}" th:value="${i.c_importancia}"><th th:text="${i.s_importancia}"></th></option>
+		</select><br>
 		<input type="submit" value="Guardar">
-		
-		
-		
-	</form><br><br>
-	
-	
+	</form>
+
+	<input type="button" value="Ver contribuyentes" onclick="location.href='./contribuyentes'" />
 </body>
-</html>
+</html></html>

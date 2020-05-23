@@ -15,101 +15,60 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import com.uca.capas.domain.Contribuyente;
+import com.uca.capas.domain.Importancia;
 import com.uca.capas.service.ContribuyenteService;
+import com.uca.capas.service.ImportanciaService;
 
 @Controller
 public class MainController {
 
-	@Autowired
-	private ContribuyenteService contribuyenteService;
-	
-	@RequestMapping("/contribuyente")	
-	public ModelAndView initMain() {
-		ModelAndView mav = new ModelAndView();
-		List<Contribuyente> contribuyentes = null;
 		
-		try {
-			contribuyentes = contribuyenteService.findAll();
-		}
-		catch(Exception e) {
-			e.printStackTrace();
-		}
+		@Autowired
+		ContribuyenteService contribuyenteService;
 		
-		mav.addObject("contribuyentes", contribuyentes);
-		mav.setViewName("main");
-		return mav;		
-	}
-	
-	
-
-	@RequestMapping(value ="/mostrarContribuyente", method= RequestMethod.POST)	
-	public ModelAndView findOne(@RequestParam(value="codigo")int id) {
-		ModelAndView mav = new ModelAndView();
-		Contribuyente contribuyente = null;
+		@Autowired
+		ImportanciaService importanciaService;
 		
-		try {
-			contribuyente = contribuyenteService.findOne(id);
-		}
-		catch(Exception e) {
-			e.printStackTrace();
-		}
-		
-		mav.addObject("contribuyente", contribuyente);
-		mav.setViewName("estudiante");
-		return mav;
-	}
-	
-	@PostMapping("/save")
-	public ModelAndView guardar(@Valid @ModelAttribute Contribuyente estudiante, BindingResult result ) {
-		
-		ModelAndView mav = new ModelAndView();
-		
-		if(result.hasErrors()) {
-			mav.setViewName("agregarEstudiante");
-		} else {
-			contribuyenteService.save(estudiante);
-			List<Contribuyente> contribuyentes = null;
+		@RequestMapping("/")
+		public ModelAndView index() {
 			
-			try {
-				contribuyentes = contribuyenteService.findAll();
-			}catch(Exception e) {
-				e.printStackTrace();
-			}
+			ModelAndView mav = new ModelAndView();
+			List<Importancia> importancias = importanciaService.findAll();
+			Contribuyente contribuyente = new Contribuyente();
+			
+			mav.addObject("contribuyente", contribuyente);
+			mav.addObject("importancias", importancias);
+			mav.setViewName("insertar");
+			
+			return mav;
+			
+		}
+		
+		@RequestMapping("/guardarCont")
+		public ModelAndView guardarCont(@ModelAttribute Contribuyente c) {
+			
+			contribuyenteService.save(c);
+			
+			ModelAndView mav = new ModelAndView();
+
+			mav.setViewName("exito");
+			
+			return mav;
+			
+		}
+		
+		@RequestMapping("/contribuyentes")
+		public ModelAndView conts() {
+			
+			ModelAndView mav = new ModelAndView();
+			List<Contribuyente> contribuyentes = contribuyenteService.findAll();
 			
 			mav.addObject("contribuyentes", contribuyentes);
-			mav.setViewName("lista");
-
+			mav.setViewName("main");
+			
+			return mav;
+			
 		}
-		return mav;
-		
-		
-	}
 	
 	
-	@RequestMapping(value = "/borrarEstudiante", method= RequestMethod.POST)
-	public ModelAndView delete(@RequestParam(value="codigo") int id)
-	{
-		ModelAndView mav = new ModelAndView();
-		List<Contribuyente> contribuyentes = null;
-		try {
-			contribuyenteService.delete(id);
-			contribuyentes = contribuyenteService.findAll();
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
-		
-		mav.addObject("contribuyentes", contribuyentes);
-		mav.setViewName("main");
-		return mav;
-	}
-	
-	
-	@GetMapping("/insertar")
-	public ModelAndView inicio() {
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("contribuyente", new Contribuyente());
-		mav.setViewName("agregar");
-
-		return mav;
-	}
 }

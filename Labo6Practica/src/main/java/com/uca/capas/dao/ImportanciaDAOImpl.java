@@ -8,41 +8,42 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import com.uca.capas.domain.Contribuyente;
+import com.uca.capas.domain.Importancia;
 
 @Repository
-public class ContribuyenteDAOImpl implements ContribuyenteDAO {
+public class ImportanciaDAOImpl implements ImportanciaDAO {
 	
 	@PersistenceContext(unitName="capas")
 	private EntityManager entityManager;
 	
 	@Override
-	public List<Contribuyente> findAll() throws DataAccessException{
+	public List<Importancia> findAll() throws DataAccessException{
 		StringBuffer sb = new StringBuffer();
-		sb.append("select * from public.contribuyente");
+		sb.append("select * from public.importancia");
 		Query query =  entityManager.createNativeQuery(sb.toString(),Contribuyente.class);
-		List<Contribuyente> res = query.getResultList();		
+		List<Importancia> resultset = query.getResultList();		
 	
-		return res;
+		return resultset;
 
 	}
 	
 	@Override
-	public Contribuyente findOne(Integer code) throws DataAccessException {
+	public Importancia findOne(Integer code) throws DataAccessException {
 	
-		Contribuyente contribuyente = entityManager.find(Contribuyente.class, code);
-		return contribuyente;
+		Importancia importancia = entityManager.find(Importancia.class, code);
+		return importancia;
 	}
 	
 	@Override
 	@Transactional
-	public void save(Contribuyente contribuyente) throws DataAccessException{
+	public void save(Importancia importancia) throws DataAccessException{
 		try {
 
-			if(contribuyente.getC_contribuyente() == null) {
-				entityManager.persist(contribuyente); 
+			if(importancia.getC_importancia() == null) {
+				entityManager.persist(importancia); 
 			}
 			else {
-				entityManager.merge(contribuyente);
+				entityManager.merge(importancia);
 				entityManager.flush();
 			}
 			
@@ -55,10 +56,10 @@ public class ContribuyenteDAOImpl implements ContribuyenteDAO {
 	
 	@Override
 	@Transactional
-	public void delete(Integer codigoContribuyente) throws DataAccessException{
+	public void delete(Integer codigoImportancia) throws DataAccessException{
 	
-	Contribuyente contribuyente = entityManager.find(Contribuyente.class, codigoContribuyente);
-	entityManager.remove(contribuyente);
+	Importancia importancia = entityManager.find(Importancia.class, codigoImportancia);
+	entityManager.remove(importancia);
 	}
 	
 }
