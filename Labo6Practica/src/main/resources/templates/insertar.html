@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlms:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Agregar nuevo estudiante</title>
+</head>
+<body>
+	
+	<form th:action="@{/save}" th:object="${contribuyente}" method="post">
+
+		<h1>Ingresar Contribuyente</h1>
+
+			<label>Nombre :</label><br>
+			<input type="text" th:field="${contribuyente.s_nombre}"><br>
+			<span th:errors="${contribuyente.s_nombre}" style="color:  #E81505;"></span><br>
+			
+			<label>Apellido:</label><br>
+			<input type="text" th:field="${contribuyente.s_apellido}"><br>
+			<span th:errors="${contribuyente.s_apellido}" style="color:  #E81505;"></span><br>
+			
+			<label>Nit: </label><br>
+			<input type="text" th:field="${contribuyente.s_nit}"><br>
+			<span th:errors="${contribuyente.s_nit}" style="color:  #E81505;"></span><br>
+			
+		
+		<input type="submit" value="Guardar">
+		
+		
+		
+	</form><br><br>
+	
+	
+</body>
+</html>

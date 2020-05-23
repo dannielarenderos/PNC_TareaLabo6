@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmins:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Lista de estudiantes</title>
+</head>
+<body>
+	<table>
+		<thead>
+			<tr>
+				<th>Nombre</th>
+				<th>Apellido</th>
+				<th>NIT</th>
+				<th>Importancia</th>
+				<th>Fecha de Ingreso</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="c : ${contribuyentes}">
+				<td th:text="${c.s_nombre}"></td>
+				<td th:text="${c.s_apellido}"></td>
+				<td th:text="${c.s_nit}"></td>
+				<td th:text="${c_importancia.s_importancia}"></td>
+				<td th:text="${f_fecha_ingreso}"></td>
+			</tr>
+		</tbody>
+	</table><br>
+	<br>
+
+	
+	<br>
+	<form th:action="@{/insertar}">
+		<input type="submit" value ="Insertar nuevo estudiante">
+	</form> <br>
+	
+	<form th:action="@{/borrar}" method="post">
+		<label> Borrar por codigo </label> <input type="number"
+			name="codigo"> <br> <input type="submit" value="Borrar">
+
+	</form>
+
+</body>
+</html>
