@@ -14,9 +14,7 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import com.uca.capas.domain.Importancia;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -41,7 +39,6 @@ public class Contribuyente{
 	@Column(name="s_apellido")
 	private String s_apellido;
 	
-	@NotNull(message = "El campo Fecha no puede quedar vacio")
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	@Column(name = "f_fecha_ingreso")
 	private Date f_fecha_ingreso;
@@ -56,8 +53,17 @@ public class Contribuyente{
 	@Column(name="s_nit")
 	private String s_nit;
 	
+	@Transient
+	private Integer cimportancia;
 	
-	
+	public Integer getCimportancia() {
+		return cimportancia;
+	}
+
+	public void setCimportancia(Integer cimportancia) {
+		this.cimportancia = cimportancia;
+	}
+
 	public Contribuyente() {
 
 	}
@@ -115,6 +121,9 @@ public class Contribuyente{
 	public void setS_nit(String s_nit) {
 		this.s_nit = s_nit;
 	}
+
+	
+	
 
 	
 	

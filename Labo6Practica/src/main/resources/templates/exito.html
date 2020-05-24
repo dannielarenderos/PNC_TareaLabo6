@@ -5,29 +5,11 @@
 <title>Lista de contribuyentes</title>
 </head>
 <body>
-	<table>
-		<thead>
-			<tr>
-				<th>Nombre</th>
-				<th>Apellido</th>
-				<th>NIT</th>
-				<th>Importancia</th>
-				<th>Fecha de Ingreso</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr th:each="c : ${contribuyentes}">
-				<td th:text="${c.s_nombre}"></td>
-				<td th:text="${c.s_apellido}"></td>
-				<td th:text="${c.s_nit}"></td>
-				<td th:text="${c_importancia.s_importancia}"></td>
-				<td th:text="${f_fecha_ingreso}"></td>
-			</tr>
-		</tbody>
-	</table><br>
+	
+	<h1> Contribuyente guardado con exito </h1>
 
 
-	<form th:action="@{/contribuyente}">
+	<form th:action="@{/}">
 		<input type="submit" value ="Regresar">
 	</form> <br>
 	

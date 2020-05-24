@@ -9,10 +9,16 @@
 	<h1>Guardar Contribuyente</h1>
 	<form method="post" th:action="@{/guardar}" th:object="${contribuyente}">
 		<label>Nombre: <input type="text" id="s_nombre" th:field="*{s_nombre}" ></label><br>
+		<span th:errors="${contribuyente.s_nombre}" style="color:  #E81505;"></span><br>
+		
 		<label>Apellido: <input type="text" id="s_apellido" th:field="*{s_apellido}" ></label><br>
+				<span th:errors="${contribuyente.s_apellido}" style="color:  #E81505;"></span><br>
+		
 		<label>NIT: <input type="text" id="s_nit" th:field="*{s_nit}" ></label><br>
+		<span th:errors="${contribuyente.s_nit}" style="color:  #E81505;"></span><br>
+		
 		<label>Importancia: </label>
-		<select th:field="*{c_importancia}">
+		<select th:field="*{cimportancia}">
 			<option th:each="im: ${importancias}" th:value="${im.c_importancia}"><th th:text="${im.s_importancia}"></th></option>
 		</select><br>
 		<input type="submit" value="Guardar">
