@@ -2,12 +2,13 @@ package com.uca.capas.controller;
 
 import java.util.List;
 
-
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import com.uca.capas.domain.Contribuyente;
@@ -40,20 +41,22 @@ public class MainController {
 			
 		}
 		
-		@RequestMapping("/guardar")
-		public ModelAndView guardarCont(@ModelAttribute Contribuyente c, BindingResult result) {
-			ModelAndView mav = new ModelAndView();
-
+		@PostMapping("/guardar")
+		public ModelAndView guardarCont(@Valid @ModelAttribute Contribuyente c, BindingResult result) {
 			
+			ModelAndView mav = new ModelAndView();
+	
+			List<Importancia> importancias = importanciaService.findAll();
 
 			if(result.hasErrors()) {
+				mav.addObject("importancias", importancias);
+
 				mav.setViewName("insertar");
 			} else {
 				contribuyenteService.save(c);
-			
+				mav.setViewName("exito");
+
 			}
-			
-			mav.setViewName("exito");
 			
 			return mav;
 			
